@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+ <div class = "nav-right">
+                <a href = "{%url 'post_new'%}">+ New Blog Post</a>
+            </div>
+ {% if user.is_authenticated %}
+            <p>Hi {{ user.username }}!</p>
+            <p><a href = "{% url 'logout' %}">logout</a></p>
+        {% else %}
+            <p> You are not logged in</p>
+            <a href = "{% url 'login' %}">login</a>
+        {% endif %}
     {% for post in object_list %}
         <div class = 'post-entry'>
             <h2><a href = "{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
